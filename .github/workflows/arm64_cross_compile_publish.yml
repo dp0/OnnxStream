@@ -53,7 +53,7 @@ jobs:
       - name: Create Debian package
         run: |
           mkdir -p $GITHUB_WORKSPACE/package/DEBIAN
-          cp -r $GITHUB_WORKSPACE/OnnxStream/debian/* $GITHUB_WORKSPACE/package/DEBIAN/
+          cp -r $GITHUB_WORKSPACE/OnnxStream/debian/control $GITHUB_WORKSPACE/package/DEBIAN/
           mkdir -p $GITHUB_WORKSPACE/package/usr/bin
           cp $GITHUB_WORKSPACE/OnnxStream/build/sd $GITHUB_WORKSPACE/package/usr/bin/onnxstream
           aarch64-linux-gnu-strip --strip-unneeded $GITHUB_WORKSPACE/package/usr/bin/onnxstream
@@ -62,6 +62,7 @@ jobs:
           cp $GITHUB_WORKSPACE/XNNPACK/LICENSE $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/LICENSE.XNNPACK
           cp $GITHUB_WORKSPACE/OnnxStream/debian/changelog $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/changelog
           gzip -9n $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/changelog
+          cp $GITHUB_WORKSPACE/OnnxStream/debian/copyright $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/copyright
           sudo chown -R root:root $GITHUB_WORKSPACE/package/
           dpkg-deb --build $GITHUB_WORKSPACE/package $GITHUB_WORKSPACE/onnxstream_${{ steps.control-version.outputs.CONTROL_VERSION }}_arm64.deb
           
