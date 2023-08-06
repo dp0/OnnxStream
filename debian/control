@@ -1,0 +1,10 @@
+Package: onnxstream
+Version: 0.1.0
+Section: graphics
+Priority: optional
+Architecture: arm64
+Maintainer: Daniel Playle <code@danplayle.com>
+Description: A low-memory image generator OnnxStream is a low-memory image
+  generator that can work with Stable Diffusion using attention slicing and
+  quantization to dramatically reduce memory requirements at a small compute
+  cost.
