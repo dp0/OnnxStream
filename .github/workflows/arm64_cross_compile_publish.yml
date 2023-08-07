@@ -74,5 +74,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd $GITHUB_WORKSPACE/OnnxStream
-          gh release create v${{ steps.control-version.outputs.CONTROL_VERSION }} $GITHUB_WORKSPACE/onnxstream_${{ steps.control-version.outputs.CONTROL_VERSION }}_arm64.deb --title "Release v${{ steps.control-version.outputs.CONTROL_VERSION }}"
+          gh release create --repo ${{ github.repository }} v${{ steps.control-version.outputs.CONTROL_VERSION }} $GITHUB_WORKSPACE/onnxstream_${{ steps.control-version.outputs.CONTROL_VERSION }}_arm64.deb --title "Release v${{ steps.control-version.outputs.CONTROL_VERSION }}"
