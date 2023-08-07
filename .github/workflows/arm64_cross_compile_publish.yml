@@ -11,6 +11,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: debian:11
 
     steps:
       - name: Check out XNNPACK
@@ -40,7 +42,7 @@ jobs:
         run: |
           mkdir XNNPACK/build && cd $GITHUB_WORKSPACE/XNNPACK/build
           cmake -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/XNNPACK/cmake/aarch64.toolchain -DXNNPACK_BUILD_TESTS=OFF -DXNNPACK_BUILD_BENCHMARKS=OFF $GITHUB_WORKSPACE/XNNPACK
-          cmake --build . --config Release
+          cmake --build . --config Release -j $(nproc)
           find ~+ -name "*.a"
 
       - name: Cross compile OnnxStream
