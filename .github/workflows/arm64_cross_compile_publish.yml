@@ -43,14 +43,12 @@ jobs:
           mkdir XNNPACK/build && cd $GITHUB_WORKSPACE/XNNPACK/build
           cmake -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/XNNPACK/cmake/aarch64.toolchain -DXNNPACK_BUILD_TESTS=OFF -DXNNPACK_BUILD_BENCHMARKS=OFF $GITHUB_WORKSPACE/XNNPACK
           cmake --build . --config Release -j $(nproc)
-          find ~+ -name "*.a"
 
       - name: Cross compile OnnxStream
         run: |
           mkdir OnnxStream/build && cd $GITHUB_WORKSPACE/OnnxStream/build
           cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DXNNPACK_DIR=$GITHUB_WORKSPACE/XNNPACK $GITHUB_WORKSPACE/OnnxStream/src
           cmake --build . --config Release
-          find ~+
 
       - name: Create Debian package
         run: |
