@@ -35,8 +35,8 @@ jobs:
     
       - name: Install cross compiler
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          apt-get update
+          apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
       - name: Cross compile XNNPACK
         run: |
@@ -65,7 +65,7 @@ jobs:
           cp $GITHUB_WORKSPACE/OnnxStream/debian/changelog $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/changelog
           gzip -9n $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/changelog
           cp $GITHUB_WORKSPACE/OnnxStream/debian/copyright $GITHUB_WORKSPACE/package/usr/share/doc/onnxstream/copyright
-          sudo chown -R root:root $GITHUB_WORKSPACE/package/
+          chown -R root:root $GITHUB_WORKSPACE/package/
           dpkg-deb --build $GITHUB_WORKSPACE/package $GITHUB_WORKSPACE/onnxstream_${{ steps.control-version.outputs.CONTROL_VERSION }}_arm64.deb
           
       - name: Create release and upload package
