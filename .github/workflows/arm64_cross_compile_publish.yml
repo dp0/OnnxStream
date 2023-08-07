@@ -33,10 +33,10 @@ jobs:
           version=$(grep '^Version:' $GITHUB_WORKSPACE/OnnxStream/debian/control | cut -d ' ' -f 2)
           echo "CONTROL_VERSION=$version" | tee -a $GITHUB_OUTPUT
     
-      - name: Install cross compiler
+      - name: Install cross compiler and utils
         run: |
           apt-get update
-          apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+          apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu cmake build-essential dpkg-dev git
 
       - name: Cross compile XNNPACK
         run: |
