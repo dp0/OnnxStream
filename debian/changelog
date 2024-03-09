@@ -1,3 +1,9 @@
+onnxstream (0.1.1) UNRELEASED; urgency=low
+
+  * Update OnnxStream
+
+ -- Daniel Playle <code@danplayle.com>  Sat, 09 Mar 2024 12:13:00 +0100
+
 onnxstream (0.1.0) UNRELEASED; urgency=low
 
   * Initial release.
