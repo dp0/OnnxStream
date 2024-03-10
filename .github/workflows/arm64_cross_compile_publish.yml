@@ -20,7 +20,7 @@ jobs:
         with:
           repository: dp0/XNNPACK
           path: XNNPACK
-          ref: 1004acaa3a5c0f515a3f7b229aef1dabe31472a4
+          ref: 579de32260742a24166ecd13213d2e60af862675
         
       - name: Check out OnnxStream
         uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
       - name: Cross compile OnnxStream
         run: |
           mkdir OnnxStream/build && cd $GITHUB_WORKSPACE/OnnxStream/build
-          cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DXNNPACK_DIR=$GITHUB_WORKSPACE/XNNPACK $GITHUB_WORKSPACE/OnnxStream/src
+          cmake -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DOVERRIDE_MARCH_NATIVE="armv8-a" -DMAX_SPEED=ON -DOS_LLM=OFF -DOS_CUDA=OFF -DXNNPACK_DIR=$GITHUB_WORKSPACE/XNNPACK $GITHUB_WORKSPACE/OnnxStream/src
           cmake --build . --config Release
 
       - name: Create Debian package

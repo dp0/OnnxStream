@@ -33,7 +33,11 @@ if(UNIX) # includes APPLE and ANDROID (ie Termux)
 	endif()
 
 	if(MAX_SPEED)
-		target_compile_options(${ONNXSTREAM_PROJECT_NAME} PRIVATE -O3 -march=native)
+		if(NOT DEFINED OVERRIDE_MARCH_NATIVE)
+			target_compile_options(${ONNXSTREAM_PROJECT_NAME} PRIVATE -O3 -march=native)
+		else()
+			target_compile_options(${ONNXSTREAM_PROJECT_NAME} PRIVATE -O3 -march=${OVERRIDE_MARCH_NATIVE})
+		endif()
 	endif()
 
 elseif(WIN32)
